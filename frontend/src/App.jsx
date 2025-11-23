@@ -9,7 +9,7 @@ import React, {
 import ForceGraph2D from "react-force-graph-2d";
 import "./App.css";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 function App() {
   const fgRef = useRef(null);
