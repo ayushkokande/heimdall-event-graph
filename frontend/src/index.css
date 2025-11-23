@@ -1,0 +1,27 @@
+/* Basic global reset for our app */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color-scheme: dark;
+}
+
+/* Remove default margins and let React app control layout */
+body {
+  margin: 0;
+  padding: 0;
+  background: #020617; /* same dark bg */
+}
+
+/* Make the React root fill the entire viewport */
+#root {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}

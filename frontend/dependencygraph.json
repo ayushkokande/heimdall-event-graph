@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {
+      "id": "Alert:Inventory_Latency",
+      "group": "alert",
+      "label": "Inventory latency breach",
+      "details": "SRE pager on high p95 latency for /inventory API across regions."
+    },
+    {
+      "id": "Error:Cache_Stampede",
+      "group": "error",
+      "label": "Cache stampede",
+      "details": "Thundering herd on Redis miss; DB pegged at 100% CPU."
+    },
+    {
+      "id": "Cache:Inventory",
+      "group": "cache",
+      "label": "Inventory cache (Redis)",
+      "details": "Redis cluster in us-east-1, stores hot inventory keys."
+    },
+    {
+      "id": "Svc:Inventory",
+      "group": "service",
+      "label": "Inventory Service (k8s)",
+      "details": "Kubernetes Deployment; reads from Redis and Postgres."
+    },
+    {
+      "id": "DB:Postgres",
+      "group": "db",
+      "label": "Postgres (Asgard)",
+      "details": "Primary OLTP DB for inventory & checkout."
+    }
+  ],
+  "links": [
+    { "source": "Svc:Inventory", "target": "Cache:Inventory", "relation": "READS" },
+    { "source": "Cache:Inventory", "target": "DB:Postgres", "relation": "FALLBACK_READS" },
+
+    { "source": "Alert:Inventory_Latency", "target": "Error:Cache_Stampede", "relation": "CAUSED_BY", "critical": true },
+    { "source": "Error:Cache_Stampede", "target": "Cache:Inventory", "relation": "CORRELATED_WITH", "critical": true },
+    { "source": "Cache:Inventory", "target": "Svc:Inventory", "relation": "BACKPRESSURE_ON", "critical": true }
+  ]
+}

@@ -1,0 +1,508 @@
+/* Root layout */
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: #020617; /* slate-950 */
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  overflow: hidden;
+}
+
+/* debug text in top-right */
+.debug-label {
+  position: fixed;
+  top: 4px;
+  right: 8px;
+  font-size: 10px;
+  color: #9ca3af;
+  z-index: 20;
+}
+
+/* top HUD: three panels */
+.top-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.4fr) minmax(0, 1.4fr);
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid #111827;
+  background: radial-gradient(
+    circle at top,
+    rgba(37, 99, 235, 0.25),
+    #020617 55%
+  );
+  box-sizing: border-box;
+}
+
+.top-panel {
+  border-radius: 12px;
+  border: 1px solid #1f2937;
+  background: rgba(15, 23, 42, 0.96);
+  padding: 8px 10px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 90px;
+}
+
+/* INCIDENT PANEL ----------------------------------------------------------- */
+
+.incident-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.incident-tab {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 11px;
+  cursor: pointer;
+}
+.incident-tab.active {
+  background: #111827;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.5);
+}
+
+.incident-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.incident-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.status-pill {
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid #4b5563;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.status-idle {
+  background: #111827;
+  color: #e5e7eb;
+}
+.status-started {
+  background: rgba(251, 191, 36, 0.12);
+  border-color: #facc15;
+  color: #facc15;
+}
+.status-resolved {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: #22c55e;
+  color: #bbf7d0;
+}
+
+.severity-pill {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #020617;
+  border: 1px solid #1d4ed8;
+  color: #bfdbfe;
+}
+
+.incident-id {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.incident-time {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.incident-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+/* generic button */
+.btn {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease,
+    box-shadow 0.15s ease;
+}
+.btn.small {
+  padding: 2px 8px;
+}
+.btn.full {
+  width: 100%;
+}
+.btn.primary {
+  border-color: #2563eb;
+  background: #111827;
+}
+.btn:hover:not(:disabled) {
+  background: #1f2937;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 15px rgba(15, 23, 42, 0.6);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.trace-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.trace-step-label {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-left: auto;
+}
+
+.trace-line {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.5fr) minmax(0, 1.2fr);
+  column-gap: 6px;
+  font-size: 11px;
+}
+
+.trace-node-id {
+  color: #9ca3af;
+}
+.trace-title {
+  font-weight: 600;
+  color: #f9fafb;
+}
+.trace-desc {
+  color: #d1d5db;
+}
+
+/* NODE PANEL --------------------------------------------------------------- */
+
+.panel-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+}
+.panel-title.small {
+  font-size: 10px;
+}
+
+.node-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pill {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #374151;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+}
+
+.node-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.node-subid {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.node-details {
+  font-size: 12px;
+  color: #d1d5db;
+  line-height: 1.35;
+}
+
+.node-empty {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* agent reasoning */
+.agent-section-title {
+  margin-top: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+}
+
+.agent-think {
+  font-size: 11px;
+  color: #e5e7eb;
+}
+
+.agent-list {
+  font-size: 11px;
+  color: #d1d5db;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.agent-entry {
+  margin-top: 4px;
+}
+.agent-entry ul {
+  margin: 2px 0 0 14px;
+  padding: 0;
+}
+
+.agent-score {
+  font-weight: 600;
+}
+
+.agent-empty {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* EXPLAINER PANEL ---------------------------------------------------------- */
+
+.explain-input {
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 12px;
+  resize: vertical;
+  min-height: 52px;
+}
+
+.explain-output {
+  white-space: pre-wrap;
+  font-size: 11px;
+  background: #020617;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  padding: 6px 8px;
+  margin-top: 4px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.upload-hint {
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 2px 0 4px 0;
+}
+
+/* GRAPH -------------------------------------------------------------------- */
+
+.graph-wrapper {
+  flex: 1;
+  position: relative;
+}
+.graph-wrapper canvas {
+  outline: none;
+}
+
+/* FIRST-SCREEN OVERLAY ----------------------------------------------------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at top,
+    rgba(15, 23, 42, 0.96),
+    rgba(15, 23, 42, 0.98)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+}
+
+.overlay-card {
+  width: 480px;
+  max-width: 90vw;
+  border-radius: 16px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
+}
+
+.overlay-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.overlay-subtitle {
+  font-size: 13px;
+  color: #d1d5db;
+  line-height: 1.5;
+}
+
+.overlay-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.overlay-skip {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
+  font-size: 14px;
+}
+
+.app-root {
+  font-size: 14px;
+}
+
+.top-panel,
+.trace-line,
+.agent-entry,
+.node-details,
+.explain-output,
+.incident-tab,
+.btn {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* make graph labels a bit larger */
+.force-graph-container canvas {
+  font-size: 16px;
+}
+
+
+/* Make the app own the entire window */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #020617;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app-root {
+  height: 100vh;          /* full viewport */
+  display: flex;
+  flex-direction: column;
+  background: #020617;
+  color: #e5e7eb;
+}
+
+/* Top HUD takes more space, easier to read */
+.top-bar {
+  display: grid;
+  grid-template-columns: 3fr 3fr 4fr;  /* incident | node | explainer */
+  gap: 14px;
+  padding: 12px 18px;
+  box-sizing: border-box;
+  height: 38vh;            /* increase this to make panels taller (e.g. 42vh) */
+}
+
+.top-panel {
+  background: #020617;
+  border-radius: 10px;
+  border: 1px solid #1e293b;
+  padding: 10px 12px;
+  overflow: hidden;
+  font-size: 14px;         /* base font size for panels */
+}
+
+/* Give the graph the remaining height */
+.graph-wrapper {
+  flex: 1;
+  height: 62vh;            /* 100 - 38 (top-bar) */
+  padding: 0 10px 10px;
+  box-sizing: border-box;
+}
+
+/* Make key texts larger */
+.node-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.node-subid,
+.node-details,
+.agent-entry,
+.trace-line span,
+.explain-output {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.panel-title.small {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Optional: make buttons more visible */
+.btn {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+.btn.primary {
+  font-weight: 600;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;      /* center horizontally */
+  justify-content: center;  /* center vertically */
+}
+
+.overlay-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* <- centers both heading & card */
+  gap: 24px;
+}
+
