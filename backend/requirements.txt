@@ -2,3 +2,5 @@ fastapi
 uvicorn[standard]
 networkx
 pydantic
+openai
+python-dotenv
